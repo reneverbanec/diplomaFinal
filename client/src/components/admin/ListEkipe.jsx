@@ -40,13 +40,12 @@ const ListEkipe = (props) => {
         toast.error(response.data.error.detail);
         toast.error(response.data.error.message);
       } else {
-        toast.success("Vnos je bil uspešno izveden");
+        toast.success("Uspešno izbrisano");
         setEkipe(
           ekipe.filter((ekipa) => {
             return ekipa.id_team !== id_team;
           })
         );
-        toast.success("Uspešno izbrisano");
       }
       console.log(response);
     } catch (err) {

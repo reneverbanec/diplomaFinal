@@ -43,7 +43,7 @@ app.post("/api/v1/vml/register", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -93,7 +93,7 @@ app.post("/api/v1/vml/login", async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -110,7 +110,7 @@ app.get("/api/v1/vml/ekipe", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -130,7 +130,7 @@ app.get("/api/v1/vml/ekipe/:ekipaid", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -151,7 +151,7 @@ app.get("/api/v1/vml/igralci/:id", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -171,7 +171,7 @@ app.get("/api/v1/vml/ekipe/:id_team/:id_player", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -190,7 +190,7 @@ app.get("/api/v1/vml/strelci", async (req, res) => {
       },
     });
   } catch (err) {
-    console.err(err.message);
+    res.json({ error: err });
   }
 });
 //najboljše asistence
@@ -208,7 +208,7 @@ app.get("/api/v1/vml/asistence", async (req, res) => {
       },
     });
   } catch (err) {
-    console.err(err.message);
+    res.json({ error: err });
   }
 });
 //tekme kluba
@@ -225,7 +225,7 @@ app.get("/api/v1/vml/tekme/:id", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err.message);
+    res.json({ error: err });
   }
 });
 
@@ -244,15 +244,15 @@ app.get("/api/v1/vml/tekme", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err.message);
+    res.json({ error: err });
   }
 });
 
-//vse tekme
+//zadnji krog tekme
 app.get("/api/v1/vml/zadnjikrog", async (req, res) => {
   try {
     const results = await db.query(
-      'select date_time,id_match, h.club AS "home", home AS "goli1", away AS "goli2", a.club AS "away" from matches AS match join teams AS h ON match.id_home = h.id_team join teams AS a ON match.id_away = a.id_team join results using (id_match) where date_time > now()::date-6 order by date_time DESC'
+      'select date_time,id_match, h.club AS "home", home AS "goli1", away AS "goli2", a.club AS "away" from matches AS match join teams AS h ON match.id_home = h.id_team join teams AS a ON match.id_away = a.id_team join results using (id_match) where date_time > now() order by date_time DESC'
     );
     console.log(results.rows);
     res.status(200).json({
@@ -263,7 +263,7 @@ app.get("/api/v1/vml/zadnjikrog", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err.message);
+    res.json({ error: err });
   }
 });
 
@@ -282,7 +282,7 @@ app.get("/api/v1/vml/posamezna/:id_match", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err.message);
+    res.json({ error: err });
   }
 });
 
@@ -300,7 +300,7 @@ app.get("/api/v1/vml/tekmedefault", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err.message);
+    res.json({ error: err });
   }
 });
 
@@ -319,7 +319,7 @@ app.get("/api/v1/vml/lestvica", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err.message);
+    res.json({ error: err });
   }
 });
 
@@ -337,7 +337,7 @@ app.post("/api/v1/vml/mostvo", validateToken, async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -355,7 +355,7 @@ app.put("/api/v1/vml/mostvo/:id", validateToken, async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
   console.log(req.params.id);
   console.log(req.body);
@@ -388,7 +388,7 @@ app.delete(
         statusText: "success",
       });
     } catch (err) {
-      console.log(err);
+      res.json({ error: err });
     }
   }
 );
@@ -404,7 +404,7 @@ app.delete("/api/v1/vml/tekme/:id_match", validateToken, async (req, res) => {
       status: "success",
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -422,7 +422,7 @@ app.delete(
         status: "success",
       });
     } catch (err) {
-      console.log(err);
+      res.json({ error: err });
     }
   }
 );
@@ -442,7 +442,7 @@ app.post("/api/v1/vml/igralec", validateToken, async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -461,7 +461,7 @@ app.post("/api/v1/vml/tekma", validateToken, async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -480,7 +480,7 @@ app.put("/api/v1/vml/rezultat/:id_match", validateToken, async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -499,7 +499,7 @@ app.post("/api/v1/vml/rezultat", validateToken, async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -524,7 +524,7 @@ app.post("/api/v1/vml/gol", validateToken, async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -552,7 +552,7 @@ app.put(
         },
       });
     } catch (err) {
-      console.log(err);
+      res.json({ error: err });
     }
   }
 );
@@ -573,7 +573,7 @@ app.get("/api/v1/vml/tekme/goli/:id_match", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -591,7 +591,7 @@ app.delete(
         status: "success",
       });
     } catch (err) {
-      console.log(err);
+      res.json({ error: err });
     }
   }
 );
@@ -615,7 +615,7 @@ app.get("/api/v1/vml/statistika/tekme", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -633,7 +633,7 @@ app.get("/api/v1/vml/statistika/ekipe", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -651,7 +651,7 @@ app.get("/api/v1/vml/statistika/igralci", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -669,7 +669,7 @@ app.get("/api/v1/vml/statistika/goli", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 

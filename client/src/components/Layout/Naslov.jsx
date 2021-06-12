@@ -90,7 +90,7 @@ const Naslov = () => {
         <MDBCard className="z-depth-5 mt-5 mb-5">
           <MDBCardHeader className="border-top">
             <MDBTypography tag="h1" variant="h1" className="text-center m-3">
-              Rezultati zadnjega odigranega kroga
+              Rezultati zadnjih odigranih krogov
             </MDBTypography>
           </MDBCardHeader>
           <MDBCardBody>

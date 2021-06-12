@@ -55,9 +55,10 @@ const DodajTekmo = () => {
           accessToken: localStorage.getItem("accessToken"),
         },
       });
+      console.log("napaka", response);
       if (response.data.error) {
         toast.error(response.data.error.detail);
-        toast.error(response.data.error.message);
+        toast.error(response.data.error.constraint);
       } else {
         toast.success("Vnos je bil uspešno izveden");
         setTekme(
@@ -96,7 +97,6 @@ const DodajTekmo = () => {
         toast.error(response.data.error.detail);
         toast.error(response.data.error.message);
       } else {
-        toast.success("Vnos je bil uspešno izveden");
         if (response.data.status === "success") {
           const idTekma = response.data.data.tekma.id_match;
 
